@@ -1,0 +1,3 @@
+Date,Time,Technician,Lab,Plot,Seed sample,Humidity,Light,Temperature,Equipment Fault,Plants,Blossoms,Fruit,Max Height,Min Height,Median Height,Notes
+2020-01-01,12:00:00,Anand Yadav,A,1,1,1.22,1.41,21.46,False,2,1,0,25.08,5.03,14.09,"Testing first run
+"
