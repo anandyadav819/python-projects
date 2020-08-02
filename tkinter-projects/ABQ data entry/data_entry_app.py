@@ -239,7 +239,7 @@ class ValidatedSpinbox(ValidatedMixin, tk.Spinbox):
         self.trigger_focusout_validation()
 
     def _key_validate(self, char, index, current, proposed,
-    action, *kwargs):
+    action, event, *kwargs):
         valid = True
         min_val = self.cget('from')
         max_val = self.cget('to')
@@ -436,9 +436,26 @@ class DataRecorderForm(tk.Frame):
         return data
 
     def reset(self):
+        lab = self.inputs['Lab'].get()
+        time = self.inputs['Time'].get()
+        technician = self.inputs['Technician'].get()
+        plot = self.inputs['Plot'].get()
+        plot_values = self.inputs['Plot'].input.cget('values') 
         for widget in self.inputs.values():
             #print(key)
             widget.set(value="")
+        current_date = datetime.today().strftime('%Y-%m-%d')
+        self.inputs['Date'].set(current_date)
+
+        self.inputs['Time'].input.focus()
+        if plot not in ('', plot_values[-1]):
+            self.inputs['Lab'].set(lab)
+            self.inputs['Time'].set(time)
+            self.inputs['Technician'].set(technician)
+            next_plot_index = plot_values.index(plot) + 1
+            self.inputs['Plot'].set(plot_values[next_plot_index])
+            self.inputs['Seed sample'].input.focus()
+
 
     def get_errors(self):
         errors = {}
